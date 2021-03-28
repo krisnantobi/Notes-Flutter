@@ -6,6 +6,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await sharedPrefs.init();
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(
       primarySwatch: Colors.indigo,
     ),
