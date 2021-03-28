@@ -34,11 +34,32 @@ class Data {
   int getLength() {
     return _data.length;
   }
+
+  /** Function ini digunakan untuk mengambil panjang data */
+  String getByIndex(index) {
+    return jsonEncode(_data[index]);
+  }
+
+  removeAt(index) {
+    _data.removeAt(index);
+    return _data;
+  }
 }
 
-class QuoteList extends StatelessWidget {
+class QuoteList extends StatefulWidget {
+  @override
+  _QuoteListState createState() => _QuoteListState();
+}
+
+class _QuoteListState extends State<QuoteList> {
   /** Create object Data*/
   Data _data = new Data();
+
+  void updateData(newData) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final data = jsonEncode({'data': newData});
+    prefs.setString('data', data);
+  }
 
   /** Function ini digunakan untuk get quator/ quote creator */
   @override
@@ -50,7 +71,25 @@ class QuoteList extends StatelessWidget {
         body: Padding(
           child: ListView.builder(
             itemCount: _data.getLength(),
-            itemBuilder: _items,
+            itemBuilder: (context, index) {
+              return Dismissible(
+                  key: Key(_data.getByIndex(index)),
+                  background: Container(
+                    alignment: AlignmentDirectional.centerEnd,
+                    padding: EdgeInsets.only(right: 40),
+                    color: Colors.red,
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onDismissed: (direction) {
+                    final removeData = _data.removeAt(index);
+                    setState(() => {removeData});
+                    updateData(removeData);
+                  },
+                  child: _items(context, index));
+            },
           ),
           padding: EdgeInsets.all(10),
         ),
