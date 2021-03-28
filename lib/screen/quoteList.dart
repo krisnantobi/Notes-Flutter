@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gson/gson.dart';
 import 'package:notes/screen/quoteForm.dart';
 import 'package:notes/screen/quoteShow.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,26 +19,27 @@ class Data {
     }
   }
 
-  /** Function ini digunakan untuk get quator/ quote creator */
+  /** Function get creator of quote */
   String getQuator(int index) {
     return _data[index]["quator"];
   }
 
-  /** Function ini digunakan untuk get quote*/
+  /** Function get quote*/
   String getQuote(int index) {
     return _data[index]["quote"];
   }
 
-  /** Function ini digunakan untuk mengambil panjang data */
+  /** Function get for length of data */
   int getLength() {
     return _data.length;
   }
 
-  /** Function ini digunakan untuk mengambil panjang data */
+  /** Function get data by index and return as string */
   String getByIndex(index) {
     return jsonEncode(_data[index]);
   }
 
+  /** Remove data and return current data after deleted*/
   removeAt(index) {
     _data.removeAt(index);
     return _data;
@@ -55,13 +55,13 @@ class _QuoteListState extends State<QuoteList> {
   /** Create object Data*/
   Data _data = new Data();
 
+  /** Function for update data list on sharePreferences after removed */
   void updateData(newData) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final data = jsonEncode({'data': newData});
     prefs.setString('data', data);
   }
 
-  /** Function ini digunakan untuk get quator/ quote creator */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +72,7 @@ class _QuoteListState extends State<QuoteList> {
           child: ListView.builder(
             itemCount: _data.getLength(),
             itemBuilder: (context, index) {
+              /** This for delete quote by slide right or left */
               return Dismissible(
                   key: Key(_data.getByIndex(index)),
                   background: Container(
@@ -105,6 +106,7 @@ class _QuoteListState extends State<QuoteList> {
         ));
   }
 
+  /** Widget for create card item quote */
   Widget _items(BuildContext context, int index) {
     return InkWell(
       child: GestureDetector(

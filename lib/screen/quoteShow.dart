@@ -1,10 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gson/gson.dart';
-import 'package:notes/screen/quoteList.dart';
 import 'package:notes/utils/shared_prefs.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class QuoteShow extends StatefulWidget {
   // String dataIndex = index;
@@ -14,9 +11,12 @@ class QuoteShow extends StatefulWidget {
 
 class _QuoteShowState extends State<QuoteShow> {
   final _formKey = GlobalKey<FormState>();
+
+  /** Define attrbute quator and quote */
   String quator = '';
   String quote = '';
 
+  /** get current quote after tap card list */
   getCurrentQuote() async {
     if (sharedPrefs.data != 'null') {
       quator = jsonDecode(sharedPrefs.currentData)['quator'];

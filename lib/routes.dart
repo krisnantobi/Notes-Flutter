@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:notes/screen/quoteList.dart';
 import 'package:notes/screen/quoteForm.dart';
 
+/**
+ * Routes for navigate
+ * Author: Krisnanto
+ * Github: github.com/krisnantobi
+ */
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // jika ingin mengirim argument
-    // final args = settings.arguments;
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => QuoteList());
       case '/about':
         return MaterialPageRoute(builder: (_) => QuoteForm());
-      // return MaterialPageRoute(builder: (_) => AboutPage(args));
       default:
         return _errorRoute();
     }

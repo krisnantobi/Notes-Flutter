@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:gson/gson.dart';
 import 'package:notes/screen/quoteList.dart';
 import 'package:notes/utils/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,10 +12,13 @@ class QuoteForm extends StatefulWidget {
 
 class _QuoteFormState extends State<QuoteForm> {
   final _formKey = GlobalKey<FormState>();
+
+  /** Define attrbute quator, quote and quotes list */
   String quator = '';
   String quote = '';
   List quotes = [];
 
+  /** Function for save data quote */
   saveQuote() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final data = jsonEncode({'data': quotes});
@@ -85,8 +87,7 @@ class _QuoteFormState extends State<QuoteForm> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
-                    // print(sharedPrefs.data);
-
+                    /** get quotes before save and store to sharedPreferences */
                     quotes = (sharedPrefs.data != '')
                         ? jsonDecode(sharedPrefs.data)['data']
                         : [];

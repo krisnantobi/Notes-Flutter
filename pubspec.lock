@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  colorize:
-    dependency: transitive
-    description:
-      name: colorize
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -93,13 +86,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  gson:
-    dependency: "direct main"
-    description:
-      name: gson
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4"
   js:
     dependency: transitive
     description:
