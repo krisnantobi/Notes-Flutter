@@ -67,6 +67,10 @@ class _QuoteListState extends State<QuoteList> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Quotes'),
+          automaticallyImplyLeading: true,
+          leading: IconButton(
+            icon: Icon(Icons.home),
+          ),
         ),
         body: Padding(
           child: ListView.builder(
@@ -96,10 +100,7 @@ class _QuoteListState extends State<QuoteList> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => QuoteForm()),
-            );
+            Navigator.pushNamed(context, '/form');
           },
           tooltip: 'Tambah quote',
           child: Icon(Icons.add),
@@ -117,11 +118,7 @@ class _QuoteListState extends State<QuoteList> {
             'quote': _data.getQuote(index),
           });
           prefs.setString('currentData', data);
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => QuoteShow()),
-          );
+          Navigator.pushNamed(context, '/show');
         },
         child: Card(
           elevation: 1,
