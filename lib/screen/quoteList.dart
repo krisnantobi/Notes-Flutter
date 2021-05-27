@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:notes/screen/quoteForm.dart';
 import 'package:notes/screen/quoteShow.dart';
+import 'package:notes/screen/quotesListFromApi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:notes/utils/shared_prefs.dart';
 
@@ -67,6 +68,28 @@ class _QuoteListState extends State<QuoteList> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Quotes'),
+          actions: [
+            // Penambahan tombol action di pojok kanan atas 3 titik.
+            PopupMenuButton(
+              icon:
+                  Icon(Icons.menu), //don't specify icon if you want 3 dot menu
+              color: Colors.blue,
+              itemBuilder: (context) => [
+                // Penambahan tombol Random Quote Today setelah titik 3 pojok kanan atas di klik
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: Text(
+                    "Random Quote Today",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+              onSelected: (item) => {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => QuoteListFromApi()))
+              },
+            ),
+          ],
         ),
         body: Padding(
           child: ListView.builder(
