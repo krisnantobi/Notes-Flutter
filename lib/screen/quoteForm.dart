@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:notes/screen/quoteList.dart';
 import 'package:notes/utils/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,6 +29,14 @@ class _QuoteFormState extends State<QuoteForm> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Tambah quote"),
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => {Navigator.pushNamed(context, '/')},
+        ),
       ),
       body: Form(
         key: _formKey,
@@ -94,10 +101,14 @@ class _QuoteFormState extends State<QuoteForm> {
                     quotes.add({'quator': quator, 'quote': quote});
 
                     saveQuote();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => QuoteList()),
-                    );
+                    Navigator.pushNamed(context, '/');
+                    // Navigator.of(context).pushReplacement(
+                    //     MaterialPageRoute(builder: (context) => QuoteList()));
+                    // Navigator.pushReplacement(context, '/');
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => QuoteList()),
+                    // );
                   }
                 },
               ),
